@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Admin – DigiShelf</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--g:#0d3b2e;--g2:#1f5a45;--mint:#e3efe6;--cream:#f6f2ea;--ink:#16201b;--muted:#5d6b63;--gold:#e8b93c;--line:#e4e0d6;--red:#c0392b;--serif:'Playfair Display',Georgia,serif}
+*{box-sizing:border-box}
+body{margin:0;font-family:'DM Sans',system-ui,sans-serif;background:var(--cream);color:var(--ink);font-size:14px}
+h1,h2,h3{font-family:var(--serif);margin:0;color:var(--g)}
+a{color:var(--g2)}
+button,input,select,textarea{font-family:inherit;font-size:14px}
+input[type=text],input[type=password],input[type=number],input[type=url],select,textarea{width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink)}
+textarea{min-height:70px;resize:vertical}
+label{display:block;font-weight:500;font-size:12px;color:var(--muted);margin:0 0 4px}
+.btn{border:0;border-radius:8px;padding:10px 18px;font-weight:500;cursor:pointer;background:var(--g);color:#fff}
+.btn:hover{background:var(--g2)}
+.btn.ghost{background:#fff;color:var(--g);border:1px solid var(--line)}
+.btn.ghost:hover{background:var(--mint)}
+.btn.danger{background:#fff;color:var(--red);border:1px solid #efc4be}
+.btn.sm{padding:6px 12px;font-size:12px}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.wrap{max-width:1000px;margin:0 auto;padding:0 20px}
+.bar{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+.bar .wrap{display:flex;align-items:center;gap:14px;padding-top:12px;padding-bottom:12px;flex-wrap:wrap}
+.bar h1{font-size:22px;margin-right:auto}
+.pill{font-size:12px;padding:4px 10px;border-radius:999px;background:var(--mint);color:var(--g)}
+.pill.dirty{background:#fde9c7;color:#7a5200}
+.box{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px;margin-top:20px}
+.login{max-width:460px;margin:60px auto}
+.login .box{display:grid;gap:14px}
+.tabs{display:flex;gap:8px;margin-top:20px}
+.tab{padding:9px 18px;border-radius:999px;border:1px solid var(--line);background:#fff;cursor:pointer;font-weight:500}
+.tab.on{background:var(--g);color:#fff;border-color:var(--g)}
+.row{display:flex;gap:14px;align-items:flex-start;padding:14px 0;border-bottom:1px solid var(--line)}
+.row:last-child{border-bottom:0}
+.thumb{width:64px;height:64px;border-radius:50%;object-fit:cover;background:var(--mint);flex:none}
+.thumb.sq{border-radius:8px}
+.grow{flex:1;min-width:0;display:grid;gap:10px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.acts{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.sw{display:inline-flex;align-items:center;gap:8px;cursor:pointer;font-weight:500;font-size:13px;color:var(--ink);margin:0}
+.sw input{width:18px;height:18px;accent-color:var(--g)}
+.tag{font-size:11px;padding:2px 8px;border-radius:999px;background:var(--mint);color:var(--g)}
+.tag.draft{background:#eee;color:#666}
+.msg{padding:10px 14px;border-radius:8px;margin-top:16px;font-size:13px}
+.msg.err{background:#fbe5e2;color:#8a1f13}.msg.ok{background:#e0f1e4;color:#14532d}.msg.info{background:#eef1ec;color:var(--muted)}
+.hint{font-size:12px;color:var(--muted);margin:4px 0 0;line-height:1.5}
+.pt{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px}
+.hide{display:none!important}
+dialog{border:0;border-radius:14px;padding:24px;width:min(560px,94vw);box-shadow:0 20px 60px rgba(0,0,0,.25)}
+dialog::backdrop{background:rgba(13,59,46,.45)}
+dialog form{display:grid;gap:12px}
+@media(max-width:640px){.two,.three{grid-template-columns:1fr}.row{flex-wrap:wrap}}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login" class="wrap login">
+  <div class="box">
+    <h1>DigiShelf Admin</h1>
+    <p class="hint" style="font-size:13px;margin:0">Sign in with your GitHub access token to manage the icons and products on your website. Only someone with the token can publish.</p>
+    <div><label for="repo">GitHub repository</label><input id="repo" type="text" value="marketer-raja/Digital-products" placeholder="owner/repository"></div>
+    <div><label for="branch">Branch</label><input id="branch" type="text" value="main"></div>
+    <div><label for="token">Access token</label><input id="token" type="password" autocomplete="off" placeholder="github_pat_…">
+      <p class="hint">Create a <b>fine-grained token</b> at GitHub → Settings → Developer settings → Personal access tokens, limited to this one repository with <b>Contents: Read and write</b>.</p></div>
+    <label class="sw"><input id="remember" type="checkbox"> Remember me on this device</label>
+    <button class="btn" id="connect">Sign in</button>
+    <div id="loginMsg"></div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app" class="hide">
+  <div class="bar"><div class="wrap">
+    <h1>DigiShelf Admin</h1>
+    <span class="pill" id="state">All changes published</span>
+    <a class="btn ghost sm" href="index.html" target="_blank" style="text-decoration:none">View site ↗</a>
+    <button class="btn ghost sm" id="backup">Download backup</button>
+    <button class="btn" id="publish" disabled>Publish to website</button>
+    <button class="btn ghost sm" id="logout">Sign out</button>
+  </div></div>
+  <div class="wrap">
+    <div id="appMsg"></div>
+    <div class="tabs"><button class="tab on" data-t="icons">Icons (categories)</button><button class="tab" data-t="products">Products</button></div>
+
+    <section id="t-icons" class="box">
+      <div class="pt"><h2>Homepage icons</h2><button class="btn sm" id="addIcon">+ Add icon</button></div>
+      <p class="hint">Each icon on the homepage links to its own page (<code>category.html?cat=…</code>) listing the products you publish in it. Leave the link blank to use that page, or paste any custom link. Untick “Published” to hide an icon.</p>
+      <div id="iconList"></div>
+    </section>
+
+    <section id="t-products" class="box hide">
+      <div class="pt"><h2>Products</h2>
+        <div class="acts"><select id="filterCat" style="width:auto"></select><button class="btn sm" id="addProd">+ Add product</button></div></div>
+      <p class="hint">E-books marked <b>Published</b> appear in “My E-books” below Top Picks on the homepage. Every published product also appears on its icon’s page.</p>
+      <div id="prodList"></div>
+    </section>
+  </div>
+</div>
+
+<!-- PRODUCT DIALOG -->
+<dialog id="pdlg">
+  <form method="dialog" id="pform">
+    <h2 id="pdlgTitle">Add product</h2>
+    <div><label for="p_title">Title *</label><input id="p_title" type="text" required></div>
+    <div class="two">
+      <div><label for="p_cat">Icon / category *</label><select id="p_cat"></select></div>
+      <div><label for="p_link">Buy / download link *</label><input id="p_link" type="url" placeholder="https://…" required></div>
+    </div>
+    <div class="two">
+      <div><label for="p_price">Price (₹)</label><input id="p_price" type="number" min="0" step="1" placeholder="299"></div>
+      <div><label for="p_mrp">Original price (₹, optional)</label><input id="p_mrp" type="number" min="0" step="1" placeholder="365"></div>
+    </div>
+    <div><label for="p_desc">Short description</label><textarea id="p_desc" maxlength="200"></textarea></div>
+    <div><label>Cover image</label>
+      <div class="acts"><img id="p_prev" class="thumb sq hide" alt=""><input id="p_file" type="file" accept="image/*"></div>
+      <p class="hint">Resized automatically and uploaded when you publish.</p></div>
+    <label class="sw"><input id="p_pub" type="checkbox" checked> Published (visible on the website)</label>
+    <div class="acts" style="justify-content:flex-end"><button type="button" class="btn ghost" id="pcancel">Cancel</button><button type="submit" class="btn">Save</button></div>
+  </form>
+</dialog>
+
+<script>
+(function(){
+'use strict';
+var $=function(id){return document.getElementById(id)};
+var DATA_PATH='data/products.json';
+var S={repo:'',branch:'main',token:'',sha:null,data:null,dirty:false,editing:null,pendingImg:null};
+
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+function msg(el,t,type){el.innerHTML=t?'<div class="msg '+(type||'info')+'">'+esc(t)+'</div>':''}
+function slug(s){return String(s).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'item'}
+function uid(){return 'p'+Date.now().toString(36)+Math.random().toString(36).slice(2,5)}
+function setDirty(v){S.dirty=v;$('state').textContent=v?'Unpublished changes':'All changes published';$('state').className='pill'+(v?' dirty':'');$('publish').disabled=!v}
+
+/* ---------- GitHub API ---------- */
+function api(path,opt){
+  opt=opt||{};
+  return fetch('https://api.github.com/repos/'+S.repo+'/contents/'+path+(opt.method==='PUT'?'':'?ref='+encodeURIComponent(S.branch)),{
+    method:opt.method||'GET',
+    headers:{'Accept':'application/vnd.github+json','Authorization':'Bearer '+S.token,'X-GitHub-Api-Version':'2022-11-28'},
+    body:opt.body?JSON.stringify(opt.body):undefined
+  }).then(function(r){
+    return r.json().catch(function(){return{}}).then(function(j){
+      if(!r.ok){var e=new Error(j.message||('HTTP '+r.status));e.status=r.status;throw e}
+      return j;
+    });
+  });
+}
+function utf8ToB64(str){var b=new TextEncoder().encode(str),s='';for(var i=0;i<b.length;i+=8192)s+=String.fromCharCode.apply(null,b.subarray(i,i+8192));return btoa(s)}
+function b64ToUtf8(b64){var bin=atob(b64.replace(/\s/g,'')),a=new Uint8Array(bin.length);for(var i=0;i<bin.length;i++)a[i]=bin.charCodeAt(i);return new TextDecoder().decode(a)}
+function friendly(e){
+  if(e.status===401)return 'GitHub rejected the token (401). Check that it is correct and not expired.';
+  if(e.status===403||e.status===404)return 'Access denied or repository not found ('+e.status+'). Make sure the repo name is right and the token has “Contents: Read and write” on it.';
+  if(e.status===409||e.status===422)return 'The site data changed on GitHub meanwhile. Sign out, sign in again and retry. ('+e.message+')';
+  return e.message||'Something went wrong.';
+}
+function loadRemote(){
+  return api(DATA_PATH).then(function(f){S.sha=f.sha;S.data=JSON.parse(b64ToUtf8(f.content))});
+}
+
+/* ---------- login ---------- */
+function connect(){
+  S.repo=$('repo').value.trim().replace(/^https?:\/\/github\.com\//,'').replace(/\.git$/,'').replace(/\/$/,'');
+  S.branch=$('branch').value.trim()||'main';
+  S.token=$('token').value.trim();
+  if(!/^[\w.-]+\/[\w.-]+$/.test(S.repo)||!S.token){msg($('loginMsg'),'Enter the repository (owner/name) and your token.','err');return}
+  msg($('loginMsg'),'Connecting…','info');$('connect').disabled=true;
+  loadRemote().then(function(){
+    var store=$('remember').checked?localStorage:sessionStorage;
+    try{localStorage.removeItem('ds_admin');sessionStorage.removeItem('ds_admin');store.setItem('ds_admin',JSON.stringify({repo:S.repo,branch:S.branch,token:S.token}))}catch(e){}
+    $('login').classList.add('hide');$('app').classList.remove('hide');
+    S.data.categories=S.data.categories||[];S.data.products=S.data.products||[];
+    renderAll();setDirty(false);
+  }).catch(function(e){msg($('loginMsg'),friendly(e),'err')}).then(function(){$('connect').disabled=false});
+}
+$('connect').onclick=connect;
+$('token').addEventListener('keydown',function(e){if(e.key==='Enter')connect()});
+$('logout').onclick=function(){if(S.dirty&&!confirm('You have unpublished changes. Sign out anyway?'))return;try{localStorage.removeItem('ds_admin');sessionStorage.removeItem('ds_admin')}catch(e){}location.reload()};
+(function restore(){
+  try{var s=JSON.parse(localStorage.getItem('ds_admin')||sessionStorage.getItem('ds_admin')||'null');
+    if(s){$('repo').value=s.repo;$('branch').value=s.branch;$('token').value=s.token;$('remember').checked=!!localStorage.getItem('ds_admin');connect()}}catch(e){}
+})();
+window.addEventListener('beforeunload',function(e){if(S.dirty){e.preventDefault();e.returnValue=''}});
+
+/* ---------- tabs ---------- */
+document.querySelectorAll('.tab').forEach(function(b){b.onclick=function(){
+  document.querySelectorAll('.tab').forEach(function(x){x.classList.toggle('on',x===b)});
+  $('t-icons').classList.toggle('hide',b.dataset.t!=='icons');$('t-products').classList.toggle('hide',b.dataset.t!=='products');
+}});
+
+/* ---------- image helpers ---------- */
+function resizeImage(file,max,cb,circle){
+  var rd=new FileReader();
+  rd.onload=function(){var im=new Image();im.onload=function(){
+    var w=im.width,h=im.height,k=Math.min(1,max/Math.max(w,h));w=Math.round(w*k);h=Math.round(h*k);
+    var c=document.createElement('canvas');c.width=w;c.height=h;var x=c.getContext('2d');
+    if(!circle){x.fillStyle='#fff';x.fillRect(0,0,w,h)}
+    x.drawImage(im,0,0,w,h);
+    cb(circle?c.toDataURL('image/png'):c.toDataURL('image/jpeg',.85));
+  };im.onerror=function(){alert('That file is not a valid image.')};im.src=rd.result};
+  rd.readAsDataURL(file);
+}
+
+/* ---------- icons ---------- */
+function renderIcons(){
+  var box=$('iconList');
+  if(!S.data.categories.length){box.innerHTML='<p class="hint">No icons yet.</p>';return}
+  box.innerHTML=S.data.categories.map(function(c,i){
+    return '<div class="row" data-i="'+i+'">'+
+    '<img class="thumb" src="'+esc(c.icon||'')+'" alt="">'+
+    '<div class="grow">'+
+      '<div class="two"><div><label>Icon name</label><input type="text" data-f="name" value="'+esc(c.name)+'"></div>'+
+      '<div><label>Link (blank = its own page)</label><input type="text" data-f="link" value="'+esc(c.link||'')+'" placeholder="category.html?cat='+esc(c.id)+'"></div></div>'+
+      '<div><label>Page description</label><input type="text" data-f="description" value="'+esc(c.description||'')+'"></div>'+
+      '<div class="acts"><label class="sw"><input type="checkbox" data-f="visible"'+(c.visible!==false?' checked':'')+'> Published</label>'+
+      '<label class="btn ghost sm" style="margin:0;cursor:pointer">Change picture<input type="file" accept="image/*" data-f="icon" hidden></label>'+
+      '<button class="btn ghost sm" data-a="up">↑</button><button class="btn ghost sm" data-a="down">↓</button>'+
+      '<button class="btn danger sm" data-a="del">Delete</button></div>'+
+    '</div></div>';
+  }).join('');
+}
+$('iconList').addEventListener('input',function(e){
+  var row=e.target.closest('.row');if(!row||!e.target.dataset.f||e.target.type==='file')return;
+  var c=S.data.categories[+row.dataset.i],f=e.target.dataset.f;
+  c[f]=e.target.type==='checkbox'?e.target.checked:e.target.value;setDirty(true);
+});
+$('iconList').addEventListener('change',function(e){
+  if(e.target.dataset.f!=='icon'||!e.target.files[0])return;
+  var row=e.target.closest('.row'),c=S.data.categories[+row.dataset.i];
+  resizeImage(e.target.files[0],220,function(d){c.icon=d;setDirty(true);renderIcons()},true);
+});
+$('iconList').addEventListener('click',function(e){
+  var a=e.target.dataset.a;if(!a)return;
+  var i=+e.target.closest('.row').dataset.i,L=S.data.categories;
+  if(a==='del'){
+    var n=S.data.products.filter(function(p){return p.category===L[i].id}).length;
+    if(!confirm('Delete the “'+L[i].name+'” icon?'+(n?' Its '+n+' product(s) will stay saved but won’t show on any icon page.':'')))return;
+    L.splice(i,1);
+  }else{var j=a==='up'?i-1:i+1;if(j<0||j>=L.length)return;var t=L[i];L[i]=L[j];L[j]=t}
+  setDirty(true);renderAll();
+});
+$('addIcon').onclick=function(){
+  var name=prompt('Name of the new icon (e.g. Courses):');if(!name||!name.trim())return;
+  var id=slug(name),base=id,n=2;
+  while(S.data.categories.some(function(c){return c.id===id}))id=base+'-'+n++;
+  S.data.categories.push({id:id,name:name.trim(),icon:'images/icons/bundles.png',link:'',visible:true,description:''});
+  setDirty(true);renderAll();
+};
+
+/* ---------- products ---------- */
+function catOptions(sel,all){
+  return (all?'<option value="all">All icons</option>':'')+S.data.categories.map(function(c){return '<option value="'+esc(c.id)+'"'+(c.id===sel?' selected':'')+'>'+esc(c.name)+'</option>'}).join('');
+}
+function renderProducts(){
+  var f=$('filterCat').value||'all';
+  var L=S.data.products.filter(function(p){return f==='all'||p.category===f});
+  var names={};S.data.categories.forEach(function(c){names[c.id]=c.name});
+  $('prodList').innerHTML=L.length?L.map(function(p){
+    return '<div class="row" data-id="'+esc(p.id)+'">'+
+      (p.image?'<img class="thumb sq" src="'+esc(p.image)+'" alt="">':'<div class="thumb sq"></div>')+
+      '<div class="grow" style="gap:4px"><b>'+esc(p.title)+'</b>'+
+      '<div><span class="tag">'+esc(names[p.category]||p.category)+'</span> <span class="tag '+(p.published===false?'draft':'')+'">'+(p.published===false?'Draft':'Published')+'</span> '+
+      (p.price?'₹'+esc(p.price):'Free')+'</div></div>'+
+      '<div class="acts"><button class="btn ghost sm" data-a="toggle">'+(p.published===false?'Publish':'Unpublish')+'</button>'+
+      '<button class="btn ghost sm" data-a="edit">Edit</button><button class="btn danger sm" data-a="del">Delete</button></div></div>';
+  }).join(''):'<p class="hint">No products here yet. Click “+ Add product”.</p>';
+}
+$('filterCat').onchange=renderProducts;
+$('prodList').addEventListener('click',function(e){
+  var a=e.target.dataset.a;if(!a)return;
+  var id=e.target.closest('.row').dataset.id,L=S.data.products;
+  var p=L.filter(function(x){return x.id===id})[0];if(!p)return;
+  if(a==='toggle'){p.published=p.published===false;setDirty(true);renderProducts()}
+  else if(a==='del'){if(confirm('Delete “'+p.title+'”?')){L.splice(L.indexOf(p),1);setDirty(true);renderProducts()}}
+  else openDlg(p);
+});
+$('addProd').onclick=function(){
+  if(!S.data.categories.length){alert('Add an icon first.');return}
+  openDlg(null);
+};
+function openDlg(p){
+  S.editing=p;S.pendingImg=p?p.image||'':'';
+  $('pdlgTitle').textContent=p?'Edit product':'Add product';
+  $('p_cat').innerHTML=catOptions(p?p.category:($('filterCat').value!=='all'?$('filterCat').value:'ebooks'));
+  $('p_title').value=p?p.title:'';$('p_link').value=p?p.link||'':'';
+  $('p_price').value=p&&p.price?p.price:'';$('p_mrp').value=p&&p.mrp?p.mrp:'';
+  $('p_desc').value=p?p.description||'':'';$('p_pub').checked=p?p.published!==false:true;
+  $('p_file').value='';
+  $('p_prev').classList.toggle('hide',!S.pendingImg);$('p_prev').src=S.pendingImg||'';
+  $('pdlg').showModal();
+}
+$('p_file').onchange=function(){
+  if(!this.files[0])return;
+  resizeImage(this.files[0],700,function(d){S.pendingImg=d;$('p_prev').src=d;$('p_prev').classList.remove('hide')});
+};
+$('pcancel').onclick=function(){$('pdlg').close()};
+$('pform').onsubmit=function(e){
+  e.preventDefault();
+  var o={title:$('p_title').value.trim(),category:$('p_cat').value,link:$('p_link').value.trim(),
+    price:Number($('p_price').value)||0,mrp:Number($('p_mrp').value)||0,description:$('p_desc').value.trim(),
+    image:S.pendingImg||'',published:$('p_pub').checked};
+  if(!o.title||!o.link)return;
+  if(S.editing){Object.assign(S.editing,o)}
+  else{o.id=uid();o.created=new Date().toISOString();S.data.products.push(o)}
+  $('pdlg').close();setDirty(true);$('filterCat').value=o.category;renderProducts();
+};
+
+function renderAll(){
+  renderIcons();
+  var cur=$('filterCat').value||'all';
+  $('filterCat').innerHTML=catOptions(cur,true);
+  renderProducts();
+}
+
+/* ---------- publish ---------- */
+function uploadDataUrl(dataUrl,folder,name){
+  var m=/^data:image\/(\w+);base64,(.+)$/.exec(dataUrl);if(!m)return Promise.reject(new Error('Bad image data'));
+  var ext=m[1]==='jpeg'?'jpg':m[1],path=folder+'/'+name+'-'+Date.now().toString(36)+'.'+ext;
+  return api(path,{method:'PUT',body:{message:'Admin: upload '+path,content:m[2],branch:S.branch}}).then(function(){return path});
+}
+$('publish').onclick=function(){
+  var btn=$('publish');btn.disabled=true;btn.textContent='Publishing…';msg($('appMsg'),'Uploading images and saving…','info');
+  var jobs=[];
+  S.data.categories.forEach(function(c){if(/^data:image/.test(c.icon||''))jobs.push(uploadDataUrl(c.icon,'images/icons',slug(c.id)).then(function(p){c.icon=p}))});
+  S.data.products.forEach(function(p){if(/^data:image/.test(p.image||''))jobs.push(uploadDataUrl(p.image,'images/products',slug(p.title).slice(0,40)).then(function(x){p.image=x}))});
+  Promise.all(jobs).then(function(){
+    return api(DATA_PATH).then(function(f){return f.sha}).catch(function(e){if(e.status===404)return undefined;throw e});
+  }).then(function(sha){
+    S.data.updated=new Date().toISOString();
+    var body={message:'Admin: update site content',content:utf8ToB64(JSON.stringify(S.data,null,2)+'\n'),branch:S.branch};
+    if(sha)body.sha=sha;
+    return api(DATA_PATH,{method:'PUT',body:body});
+  }).then(function(r){
+    S.sha=r.content.sha;setDirty(false);renderAll();
+    msg($('appMsg'),'Published! GitHub Pages usually shows the update within 1–2 minutes (refresh the site to see it).','ok');
+  }).catch(function(e){
+    msg($('appMsg'),'Could not publish: '+friendly(e),'err');
+  }).then(function(){btn.textContent='Publish to website';btn.disabled=!S.dirty});
+};
+
+$('backup').onclick=function(){
+  var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(S.data,null,2)],{type:'application/json'}));
+  a.download='products-backup.json';a.click();
+};
+})();
+</script>
+</body>
+</html>

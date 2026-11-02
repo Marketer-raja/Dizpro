@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shop – DigiShelf</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<symbol id="star" viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.2 6.1 20.6l1.3-6.6L2.5 9.4l6.6-.8z" fill="currentColor"/></symbol>
+<symbol id="cart" viewBox="0 0 24 24"><path d="M3 4h2.5l2.2 10.5h9.6L19.5 7H6.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="19" r="1.4" fill="currentColor"/><circle cx="17" cy="19" r="1.4" fill="currentColor"/></symbol>
+<symbol id="dl" viewBox="0 0 24 24"><path d="M12 4v11M7 11l5 5 5-5M5 20h14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+
+<!-- HEADER -->
+<header class="top">
+<div class="wrap">
+<a href="index.html" class="logo">
+<svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true"><rect x="4" y="8" width="32" height="28" rx="6" fill="none" stroke="#0d3b2e" stroke-width="2.4"/><path d="M13 8V6a7 7 0 0 1 14 0v2" fill="none" stroke="#0d3b2e" stroke-width="2.4" transform="translate(0 3)"/><path d="M13 20l7 8 7-8" fill="none" stroke="#1f5a45" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+<span><b>DigiShelf</b><small>Create · Plan · Grow</small></span>
+</a>
+<form class="search" action="category.html" method="get"><input type="hidden" name="cat" value="all">
+<label for="q" class="sr">Search</label>
+<input id="q" name="q" type="text" placeholder="Search e-books, trackers, templates and more…">
+<button type="submit" aria-label="Search"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></button>
+</form>
+<div class="icons">
+<a href="#" class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#16201b" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-5 15-5 16 0"/></svg>Account</a>
+<a href="#" class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#16201b" stroke-width="1.8" stroke-linejoin="round"><path d="M12 20s-8-5-8-11a4.5 4.5 0 0 1 8-2.5A4.5 4.5 0 0 1 20 9c0 6-8 11-8 11z"/></svg>Wishlist<i>3</i></a>
+<a href="#" class="ico"><svg width="22" height="22" style="color:#16201b"><use href="#cart"/></svg>Cart<i>2</i></a>
+</div>
+</div>
+</header>
+<nav class="menu">
+<div class="wrap">
+<a href="#" class="allcat"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>All Categories</a>
+<a href="index.html" class="cur">Home</a><a href="category.html?cat=all">Shop</a><a href="#">Deals</a><a href="#">New Arrivals</a><a href="#">Bestsellers</a><a href="#">Blog</a><a href="#">My Downloads</a>
+</div>
+</nav>
+
+<main class="wrap">
+<div class="crumbs"><a href="index.html">Home</a> / <span id="crumb">Shop</span></div>
+<ul class="cats" id="cats"></ul>
+<div class="page-h"><h1 id="ptitle">Shop</h1><p id="pdesc"></p></div>
+<section class="sec" style="padding-top:18px"><div class="pgrid" id="plist"><div class="empty">Loading…</div></div></section>
+</main>
+
+<!-- FOOTER -->
+<footer>
+<div class="wrap fcols">
+<div class="fcol"><b style="font-family:var(--serif);font-size:22px;color:#fff">DigiShelf</b><p>Quality e-books, trackers and templates, delivered instantly.</p>
+<div class="soc">
+<a href="#" aria-label="Instagram"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><rect x="4" y="4" width="16" height="16" rx="5"/><circle cx="12" cy="12" r="3.6"/></svg></a>
+<a href="#" aria-label="YouTube"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="4"/><path d="M10 9.5l5 2.5-5 2.5z"/></svg></a>
+<a href="#" aria-label="Pinterest"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M11 9.5c1.6-.6 3 .4 3 1.9 0 1.7-1.3 3.1-2.6 2.6M11.3 12.5L10 18"/></svg></a>
+</div></div>
+<div class="fcol"><h4>Shop</h4><a href="category.html?cat=ebooks">E-books</a><a href="category.html?cat=trackers">Trackers</a><a href="category.html?cat=templates">Templates</a><a href="category.html?cat=bundles">Bundles</a></div>
+<div class="fcol"><h4>Customer Service</h4><a href="#">My Downloads</a><a href="#">Refund Policy</a><a href="#">Help Centre</a><a href="#">Contact Us</a></div>
+<div class="fcol"><h4>Company</h4><a href="#">About Us</a><a href="#">Blog</a><a href="#">Affiliate Program</a><a href="#">Licence Terms</a></div>
+<div class="fcol"><h4>We Accept</h4><div class="pay"><span>UPI</span><span>VISA</span><span>Mastercard</span><span>RuPay</span></div></div>
+</div>
+<div class="wrap copy"><span>© 2026 DigiShelf. All rights reserved.</span><div><a href="#">Privacy Policy</a><a href="#">Terms of Service</a><a href="#">Cookie Policy</a></div></div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
