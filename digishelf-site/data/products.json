@@ -1,0 +1,13 @@
+{
+  "categories": [
+    {"id":"ebooks","name":"E-books","icon":"images/icons/ebooks.png","link":"","visible":true,"description":"Practical e-books you can download instantly."},
+    {"id":"trackers","name":"Trackers","icon":"images/icons/trackers.png","link":"","visible":true,"description":"Habit, budget and goal trackers."},
+    {"id":"templates","name":"Templates","icon":"images/icons/templates.png","link":"","visible":true,"description":"Ready-to-use templates for work and life."},
+    {"id":"planners","name":"Planners","icon":"images/icons/planners.png","link":"","visible":true,"description":"Daily, weekly and yearly planners."},
+    {"id":"worksheets","name":"Worksheets","icon":"images/icons/worksheets.png","link":"","visible":true,"description":"Printable and fillable worksheets."},
+    {"id":"printables","name":"Printables","icon":"images/icons/printables.png","link":"","visible":true,"description":"Print-ready designs."},
+    {"id":"bundles","name":"Bundles","icon":"images/icons/bundles.png","link":"","visible":true,"description":"Save more with product bundles."}
+  ],
+  "products": [],
+  "updated": ""
+}
