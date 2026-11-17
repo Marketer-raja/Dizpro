@@ -162,3 +162,7 @@ footer{background:#103d30}
 
 /* Empty catalogs use the existing product section width. */
 #top-picks > .empty,#ebook-list > .empty,#plist > .empty{grid-column:1/-1}
+
+/* Photos replace only the three original promotional illustrations. */
+.promo .promo-photo{flex:none;width:120px;height:120px;object-fit:cover;border-radius:10px;display:block}
+@media(max-width:380px){.promo .promo-photo{width:96px;height:96px}}

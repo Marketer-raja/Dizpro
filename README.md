@@ -18,3 +18,6 @@ The six newest published products populate Top Picks. Published e-books populate
 Product links use your existing external checkout/download flow. The original placeholder account, cart, wishlist, newsletter and other unrelated site features have not been changed or connected to a backend.
 
 Validation: JavaScript syntax and fixture-based storefront checks cover empty catalog, publishing, drafts, six-item limit, e-book filtering, category search and product links. Live GitHub publishing requires the owner's token and was not performed.
+
+## Promotional photos
+The three collection cards now use locally included, AI-generated decorative photos in images/promos/. Their Shop Now links open All Products, Planners and Templates. Existing layout, catalog and admin functionality are retained. Customer review avatars remain unchanged.
