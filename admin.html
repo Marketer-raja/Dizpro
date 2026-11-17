@@ -7,7 +7,7 @@
 <title>Admin – DigiShelf</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 <style>
-:root{--g:#0d3b2e;--g2:#1f5a45;--mint:#e3efe6;--cream:#f6f2ea;--ink:#16201b;--muted:#5d6b63;--gold:#e8b93c;--line:#e4e0d6;--red:#c0392b;--serif:'Playfair Display',Georgia,serif}
+:root{--g:#124c3b;--g2:#21684f;--mint:#e5f1e9;--cream:#faf8f2;--ink:#1d2924;--muted:#596c62;--gold:#d7ab45;--line:#dedfd3;--red:#c0392b;--serif:'Playfair Display',Georgia,serif}
 *{box-sizing:border-box}
 body{margin:0;font-family:'DM Sans',system-ui,sans-serif;background:var(--cream);color:var(--ink);font-size:14px}
 h1,h2,h3{font-family:var(--serif);margin:0;color:var(--g)}
@@ -48,7 +48,7 @@ label{display:block;font-weight:500;font-size:12px;color:var(--muted);margin:0 0
 .tag{font-size:11px;padding:2px 8px;border-radius:999px;background:var(--mint);color:var(--g)}
 .tag.draft{background:#eee;color:#666}
 .msg{padding:10px 14px;border-radius:8px;margin-top:16px;font-size:13px}
-.msg.err{background:#fbe5e2;color:#8a1f13}.msg.ok{background:#e0f1e4;color:#14532d}.msg.info{background:#eef1ec;color:var(--muted)}
+.msg.err{background:#fbe5e2;color:#8a1f13}.msg.ok{background:#e0f1e4;color:#14532d}.msg.info{background:#eff4ed;color:var(--muted)}
 .hint{font-size:12px;color:var(--muted);margin:4px 0 0;line-height:1.5}
 .pt{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px}
 .hide{display:none!important}
@@ -65,7 +65,7 @@ dialog form{display:grid;gap:12px}
   <div class="box">
     <h1>DigiShelf Admin</h1>
     <p class="hint" style="font-size:13px;margin:0">Sign in with your GitHub access token to manage the icons and products on your website. Only someone with the token can publish.</p>
-    <div><label for="repo">GitHub repository</label><input id="repo" type="text" value="marketer-raja/Digital-products" placeholder="owner/repository"></div>
+    <div><label for="repo">GitHub repository</label><input id="repo" type="text" value="marketer-raja/Dizpro" placeholder="owner/repository"></div>
     <div><label for="branch">Branch</label><input id="branch" type="text" value="main"></div>
     <div><label for="token">Access token</label><input id="token" type="password" autocomplete="off" placeholder="github_pat_…">
       <p class="hint">Create a <b>fine-grained token</b> at GitHub → Settings → Developer settings → Personal access tokens, limited to this one repository with <b>Contents: Read and write</b>.</p></div>
@@ -98,7 +98,7 @@ dialog form{display:grid;gap:12px}
     <section id="t-products" class="box hide">
       <div class="pt"><h2>Products</h2>
         <div class="acts"><select id="filterCat" style="width:auto"></select><button class="btn sm" id="addProd">+ Add product</button></div></div>
-      <p class="hint">E-books marked <b>Published</b> appear in “My E-books” below Top Picks on the homepage. Every published product also appears on its icon’s page.</p>
+      <p class="hint">The six newest products marked <b>Published</b> appear in “Top Picks For You”. Published e-books also appear in “My E-books”. All published products appear in the shop and their category pages. Save your product, then click <b>Publish to website</b> to make it live.</p>
       <div id="prodList"></div>
     </section>
   </div>

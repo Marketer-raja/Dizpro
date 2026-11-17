@@ -34,7 +34,7 @@
       return '<li><a class="cat" href="' + esc(catHref(c)) + '"' + ext + '><span class="c">' +
         '<img src="' + esc(safeUrl(c.icon)) + '" alt="" loading="lazy"></span>' + esc(c.name) + '</a></li>';
     }).join('');
-    html += '<li><a class="cat" href="category.html?cat=all"><span class="c all"><svg width="40" height="40" viewBox="0 0 24 24" fill="#0d3b2e"><circle cx="6" cy="6" r="1.8"/><circle cx="12" cy="6" r="1.8"/><circle cx="18" cy="6" r="1.8"/><circle cx="6" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="18" cy="12" r="1.8"/><circle cx="6" cy="18" r="1.8"/><circle cx="12" cy="18" r="1.8"/><circle cx="18" cy="18" r="1.8"/></svg></span>View All</a></li>';
+    html += '<li><a class="cat" href="category.html?cat=all"><span class="c all"><svg width="40" height="40" viewBox="0 0 24 24" fill="#124c3b"><circle cx="6" cy="6" r="1.8"/><circle cx="12" cy="6" r="1.8"/><circle cx="18" cy="6" r="1.8"/><circle cx="6" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="18" cy="12" r="1.8"/><circle cx="6" cy="18" r="1.8"/><circle cx="12" cy="18" r="1.8"/><circle cx="18" cy="18" r="1.8"/></svg></span>View All</a></li>';
     ul.innerHTML = html;
   }
 
@@ -60,6 +60,11 @@
   }
 
   function renderHome(data) {
+    var picks = document.getElementById('top-picks');
+    if (picks) {
+      var latest = published(data, 'all').slice(0, 6);
+      picks.innerHTML = latest.length ? latest.map(card).join('') : '<div class="empty">New products are coming soon.</div>';
+    }
     var box = document.getElementById('ebook-list');
     if (!box) return;
     var list = published(data, 'ebooks');

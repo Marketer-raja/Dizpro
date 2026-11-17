@@ -57,19 +57,6 @@
       "description": "Save more with product bundles."
     }
   ],
-  "products": [
-    {
-      "title": "Cindrella",
-      "category": "ebooks",
-      "link": "https://marketer-raja.github.io/Digital-products/",
-      "price": 167,
-      "mrp": 0,
-      "description": "My first E-Book",
-      "image": "images/products/cindrella-mvzcc9iy.jpg",
-      "published": true,
-      "id": "pmvzcbs1n0sm",
-      "created": "2026-11-02T14:14:43.643Z"
-    }
-  ],
-  "updated": "2026-11-02T14:15:09.842Z"
+  "products": [],
+  "updated": "2026-11-17T17:30:00Z"
 }
